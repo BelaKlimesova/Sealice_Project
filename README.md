@@ -9,6 +9,7 @@ Question two: Effect of environmental variables on sea lice abundance
 	Response variable: sea lice count total mobile 
 	Random effect: nested (Farm/Pen)
 	Predictors: temperature, oxygen, salinity, month, year, time in seawater, class of fish (S0/S1/2), company (three levels: Mowi, Bradan, others)
+
 Structure of the model
 First without random effects
 Lepeophtheirus Salmonis Total ~ Bay Name + Temperature + Salinity + Oxygen + Year + Month + Time in Sea + Class + Company
@@ -28,6 +29,7 @@ From all the distribution the zeros fit well in Negative binomial and Hurdle neg
 Focusing on Hurdle negative binomial model for further work
 
 ZANB (Hurdle negative binomial model):
+
 Detection of Heteroskedasticity
 Predicted values by the model are not very accurate, the prediction for high values (more than 30 doesn't work at all)
 Detection of multicollinearity (Count part of the model: Bay name, Temperature, Year, Month, Company; Zero part of the model: Bay name, Temperature, Month, Company)
