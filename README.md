@@ -1,33 +1,44 @@
-# Sealice_Project
+Sealice_Project
 
-Question two: Effect of environmental variables on sea lice abundance 
+Task 1: Epidemiological study of sea lice on Altantic salmon farms in Ireland
 
+Questions:
+1 Effect of environmental factors on sea lice abundance
+2 Effect of geographical factors on sea lice abundance
+3 Effect of temporal factors on sea lice abundance
+
+1 Effect of environmental factors on sea lice abundance
 Using MI Individual Database 
-Looking at the influence of temperature (and its changes throughout the years) and time of the year (month) on sea lice abundance  
-On bay level 
-Mixed-effects linear regression 
-Response variable: sea lice count total mobile  
-Random effect: nested (Farm/Pen) 
-Predictors: temperature, oxygen, salinity, month, year, time in seawater, class of fish (S0/S1/2), company (three levels: Mowi, Bradan, others) 
+Looking at the effect of environmental factors (temperature, salinity, oxygen) on sea lice abundance
+Using glmmTMB
+Response variable: count of total mobile sea lice
+Random effect: Site identity
+Fixed effect: temperature, oxygen, salinity, year, time in seawater, class of fish (S0/S1/2),
+company (three levels: Mowi, Bradan, others), pen (Random, Standard) 
+Detection of temporal autocorrelation
 
-Structure of the model 
+2 Effect of geographical factors on sea lice abundance
+Using MI Individual Database 
+Looking at the effect of geographical factors (Depth, Distance from mouth, Length, Orientation, Width of mouth) on sea lice abundance
+Using glmmTMB
+Response variable: count of total mobile sea lice
+Random effect: Pen identity
+Fixed effect: Depth, Distance from mouth, Length, Orientation, Width of mouth, Year, Month, Time in sea, Class, Company, Fallow period
+Detection of temporal autocorrelation
 
-First without random effects 
-Lepeophtheirus Salmonis Total ~ Bay Name + Temperature + Salinity + Oxygen + Year + Month + Time in Sea + Class + Company 
+3 Effect of temporal factors on sea lice abundance
+Using MI Mean Database 
+Looking at the effect of temporaal factors (Year, Month) on sea lice abundance
+Using glmmTMB
+Response variable: mean of total mobile sea lice per pen
+Random effect: Site identity
+Fixed effect: Year, Month, Class, Time in sea, Pen, Bay
+Detection of temporal autocorrelation
 
-Distribution 
+Exploration of temporal autocorrelation in datasets with decreased variation
+Mi Individual Database: exploration of data on the level of fish, pen, farm (count per fish, mean per pen, mean per farm)
+Mi Mean Database: exploration of data on the level of pen, farm (mean per pen, mean per farm)
+There is decrease of temporal autocorrelation and its complexity with the simplification of the data. It seems that the temporal autocorrelation is caused by the complex structure of the data (30 fish, 2 pens per farm from one data point)
 
-Poisson: high overdispersion, underfitting of zeros 
-Quasi-Poisson: underfitting of zeros 
-Negative Binomial: overdispersion 1.5, zeros are ok  
-Hurdle models: Poisson: underfitting of zeros; Negative Binomial: overdispersion 1.22, zeros are ok 
-Zero-inflated models: Poisson: underfitting of zeros; Negative Binomial: overdispersion 1.57, underfitting of zeros 
 
-From all the distribution the zeros fit well in Negative binomial and Hurdle negative binomial. Overall, the hurdle model shows better fit.  
-Focusing on Hurdle negative binomial model for further work 
 
-ZANB (Hurdle negative binomial model): 
-Detection of Heteroskedasticity 
-Predicted values by the model are not very accurate, the prediction for high values (more than 30 doesn't work at all) 
-Detection of multicollinearity (Count part of the model: Bay name, Temperature, Year, Month, Company; Zero part of the model: Bay name, Temperature, Month, Company) 
-Detection of temporal autocorrelation 
